@@ -15,8 +15,13 @@ import java.util.List;
 @RestController
 public class CatController {
 
+    private final CategorieRepo catRepository;
+
     @Autowired
-    CategorieRepo catRepository;
+    public CatController(CategorieRepo catRepository) {
+        this.catRepository = catRepository;
+    }
+
 
     // Get All Notes
     @GetMapping("/categorie")
@@ -46,7 +51,7 @@ public class CatController {
                 .orElseThrow(() -> new CatNotFoundException(bookId));
 
 
-        CategorieDB updatedBook = catRepository.save(categorie);
+        CategorieDB updatedBook = catRepository.saveCat(categorie);
 
         return updatedBook;
     }
